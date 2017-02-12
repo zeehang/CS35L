@@ -1,0 +1,6 @@
+randlibsw.so: randlibsw.c
+	$(CC) $(CFLAGS) -c randlibsw.c -fPIC -shared
+randlibhw.so: randlibhw.c
+	$(CC) $(CFLAGS) -c randlibhw.c -fPIC -shared
+randmain: randmain.o randcpuid.o
+	$(CC) $(CFLAGS) -o randmain.o randcpuid.o -ldl -Wl,-rpath=$(PWD) randmain

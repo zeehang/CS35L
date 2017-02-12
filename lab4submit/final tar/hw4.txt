@@ -1,0 +1,12 @@
+Homework Log
+2. Used git checkout v3.0 -b quote to create the new branch
+3. I ran the patch command and applied the patch
+4. Using C-x c-a, I created a ChangeLog entry noting the
+changes made, noting the change in ASCII quotation marks
+6. I used git add . to add necessary files to the commit, then used
+git commit with the changeLog entry as input
+7. Generated a formatted patch using git format-patch -1 --stdout >> formatted-patch.txt
+8. Partner: Benson Han, patch was successful
+9. ChangeLog contains the commit message
+10. Used gitk on the linux server and created a screenshot
+

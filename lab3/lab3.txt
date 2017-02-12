@@ -1,0 +1,59 @@
+Lab Log
+
+1. Used wget to download coreutils 7.6
+2. Untar/unzip file with -tar -xzvf coreutils-7.6.tar.gz
+3. In my home directory used mkdir coreutilsInstall to create a new directory
+4. I navigated into the directory ~/coreutils-7.6 directory ran
+make --prefix="/u/cs/ugrad/zhangm/coreutilsInstall"
+This prefix ensured that it would install to the right directory.
+This compiled the program
+5. I then ran make install to install it to that directory
+6. To patch the file, I copied the code available at the website,
+cd into the coreutils-7.6 directory
+and used patch -p1 < patch to apply the patch.
+The -p1 ensured the program was looking the right directory for the patch
+7. In the coreutil-7.6 directory I ran make to build the patch
+8. To test the modified ls, I ran the ls located in ~/coreutils-7.6/src
+9. To test the unmodified ls, I ran the ls located in ~/coreutilsInstall/bin
+
+Unmodified ls:
+-rwxr-xr-x 1 zhangm csugrad 127655 2016-10-12 09:05 [
+-rwxr-xr-x 1 zhangm csugrad 119286 2016-10-12 09:05 base64
+-rwxr-xr-x 1 zhangm csugrad  90221 2016-10-12 09:05 basename
+-rwxr-xr-x 1 zhangm csugrad 205955 2016-10-12 09:05 cat
+-rwxr-xr-x 1 zhangm csugrad 250421 2016-10-12 09:05 chcon
+-rwxr-xr-x 1 zhangm csugrad 229158 2016-10-12 09:05 chgrp
+
+Patched ls:
+-rwxr-xr-x 1 zhangm csugrad 127655 Oct 12 09:04 [
+-rwxr-xr-x 1 zhangm csugrad 119286 Oct 12 09:05 base64
+-rw-r--r-- 1 zhangm csugrad   8422 Sep  1  2009 base64.c
+-rw-r--r-- 1 zhangm csugrad  37984 Oct 12 09:05 base64.o
+-rwxr-xr-x 1 zhangm csugrad  90221 Oct 12 09:05 basename
+-rw-r--r-- 1 zhangm csugrad   3787 Sep  1  2009 basename.c
+
+In the patched version, a file that is over a year old displays the year in
+place of the time it was last modified.
+
+Lab notes for comm.py:
+
+The parser features the options for -1, -2 and -3.
+After storing the input file names in variables, I used an if statement
+to check for dashes, after which I read either from the file or STDIN.
+To check if the line was in another file,
+I used a for loop nested in a while loop.
+Always checking the first element in the first file, if the line appeared in
+the second file, the program adds it to a third list in a tuple where the
+first index is the word and the second is the column number it belongs (3).
+The word is then removed from both the first and the second lists.
+If the word does not match any lines in the second file, it is added
+to the third list with the column number it belongs to (1).
+At the end of the while loop, all remaining entries in the second file
+are added to the third list with the column number it belongs to (2)
+
+To print a variable, I create a variable that contains the number of tabs
+necessary for the column, adding tabs via a series of if statements
+depending on which options were set for the command.
+
+The only change I had to make to make sure the script worked in python 3
+was to make sure that the print function used parantheses.

@@ -1,0 +1,96 @@
+--- exer1.html	2016-09-30 00:13:12.431476000 -0700
++++ exer4.html	2016-09-30 22:45:34.732379000 -0700
+@@ -15,7 +15,7 @@
+ 
+ <h2>Laboratory: Linux and Emacs scavenger hunt</h2>
+ 
+-<!-- diff，在UNIX系統上的一個工具程式，它可以比較兩個檔案之間的不同。通常它被用來比較同一個檔案，在不同版本間的差異。它可以產生一個擴展名為.diff或.patch的檔案，這個檔案可以被另一個工具程式patch來使用。-->
++
+ 
+ <p>Instructions: Use the commands that you learned in class to find
+ answers to these questions. Don't use a search engine like Google, and
+@@ -86,11 +86,11 @@
+ When looking at the directory <samp>/usr/bin</samp>, what's the
+ difference between the output of the <samp>ls -l</samp> command,
+ and the directory listing of the Emacs <samp>dired</samp> command?</li>
+-</ol>
++<Ol>
+ 
+ <h2>Homework: Learning to use Emacs</h2>
+ 
+-<!-- DELETEME DELETEME DELETEME -->
++
+ 
+ <ul>
+  <li>Keith Waclena, <a
+@@ -139,7 +139,7 @@
+ <li>Did you move the cursor using the arrow keys? If so, repeat the
+ above steps, without using the arrow keys.</li>
+ <li>When you are done, exit Emacs.</li>
+-</ol>
++<Ol>
+ 
+ <h3>Exercise 1.2: Deleting text in Emacs</h3>
+ 
+@@ -153,7 +153,7 @@
+ "<samp>DELETEME DELETEME DELETEME</samp>".</li>
+ <li>Delete the HTML comment containing the text "<samp>https://en.wikipedia.org/wiki/HTML_comment#Comments</samp>".</li>
+ <li>There's one more HTML comment; delete that one too.</li>
+-</ol>
++<Ol>
+ 
+ <p>
+ Once again, try to accomplish the tasks using a small number of keystrokes.
+@@ -181,7 +181,7 @@
+ 
+ <li>When you finish, save the text file and exit Emacs. As before,
+ use the <samp>diff</samp> command to check your work.</li>
+-</ol>
++<Ol>
+ 
+ <h3>Exercise 1.4: Other editing tasks in Emacs</h3>
+ 
+@@ -221,7 +221,7 @@
+ should be changes from "<samp>&lt;ol&gt;</samp>" to "<samp>&lt;Ol&gt;</samp>",
+ and a long HTML comment at the end.</li>
+ 
+-</ol>
++<Ol>
+ 
+ <h3>Exercise 1.5: Doing commands in Emacs</h3>
+ 
+@@ -263,7 +263,7 @@
+ maintaining for this exercise. (You <em>are</em> using Emacs to
+ maintain the log, aren't you?)</li>
+ 
+-</ol>
++<Ol>
+ 
+ <h3>Exercise 1.6: Running Elisp code</h3>
+ 
+@@ -296,13 +296,12 @@
+ <li>Assuming <samp>(random)</samp> is truly random, what is the
+   probability that the two-variable product mentioned above is
+   mathematically correct? Explain how you calculated this.</li>
+-</ol>
++<Ol>
+ 
+ <h2>Submit</h2>
+ 
+-<!-- You can learn more about HTML comments at
+-	<https://en.wikipedia.org/wiki/HTML_comment#Comments>.
+-	-->
++
++
+ 
+ <p>Submit the following files.</p>
+ 
+@@ -337,7 +336,7 @@
+ <pre><samp><a href='https://en.wikipedia.org/wiki/AWK'>awk</a> '/\r/ || 80 &lt; length' key1.txt ans1.txt
+ </samp></pre>
+ 
+-<p>should output only a small number of log lines<!---->.</p>
++<p>should output only a small number of log lines.<!----></p>
+ 
+ <hr>
+ <address>

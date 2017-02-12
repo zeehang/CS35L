@@ -1,0 +1,69 @@
+Laboratory Notes
+
+1. I used the command git clone git://git.savanna.gnu.org/diffutils.git in order to clone the git directory on to my local machine.
+2. I used cd to get into the newly created diffutils directory and used git log > git-log.txt to create a text file showing changes
+3. Used git tag > git-tags.txt to create a file with the tags used in the git respository
+4. I used the search function in emacs to find the string that matched that commit in git-log.txt.
+Making note of the commit number, I used the command git format-patch -1 <COMMIT NUMBER> to create a patch, then renamed it.
+5. To check out version 3.0, I used the commmand git checkout v3.0 (seeing as v3.0 was a tag in the git repository)
+6. Using the command patch -p1 < quote-patch,txt, I was able to patch the file. There were 3 patches where the file couldn't be found, HACKING, diffutils.texi and man/help2man
+The following parts failed
+patching file src/diff.c
+Hunk #10 FAILED at 876.
+Hunk #11 FAILED at 906.
+Hunk #12 FAILED at 942.
+patching file src/diff3.c
+Hunk #6 FAILED at 433.
+7. According to git status the following files were modified.
+	modified:   NEWS
+	modified:   README
+	modified:   TODO
+	modified:   doc/diagmeet.note
+	modified:   ms/config.bat
+	modified:   ms/config.site
+	modified:   po/en.po
+	modified:   src/analyze.c
+	modified:   src/cmp.c
+	modified:   src/context.c
+	modified:   src/diff.c
+	modified:   src/diff.h
+	modified:   src/diff3.c
+	modified:   src/dir.c
+	modified:   src/ifdef.c
+	modified:   src/io.c
+	modified:   src/sdiff.c
+	modified:   src/side.c
+	modified:   src/system.h
+	modified:   src/util.c
+	modified:   tests/help-version
+9. According to the above list, I used emacs to open each file and used C-x v u to remove the changes to files that were not .c. These files were
+NEWS
+README
+TODO
+doc/diagmeet.note
+ms/config.bat
+ms/config.site
+po/en.po
+src/diff.h
+src/system.h
+tests/help-version
+
+10. I manually applied rejected changes from diff3.c.rej and diff.c.rej
+
+Additionally, I reverted the changes to comments using C-c C-a
+11. I used git clean -f to remove untracked files.
+12. git diff > quote-3.0-patch.txt
+13. ran ./bootstrap
+applied the patch available at the website
+./configure
+make
+make check
+
+ran ./diff --help and ./diff . - to make sure that it works
+
+14. I renamed the directory and made a new directory with
+git clone, then git checkout v3.0 and ran the command given
+in the spec.
+
+15. The two versions are not identical, but the differences are innnocuous,
+they simply feature the difference in quotation marks.

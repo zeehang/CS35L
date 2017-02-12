@@ -1,0 +1,70 @@
+Lab 2 Log
+
+tr -c 'A-Za-z' '[\n*]' - for any character that are the complement of the first
+set (so any character that is not an upper or lower case letter), that letter wi
+ll be replaced by a newline
+
+tr -cs 'A-Za-z' '[\n*]' - if there are multiple new lines in a row, they are co
+mpressed to one single newline. So now, all words have their own line in the fi
+le.
+
+tr -cs 'A-Za-z' '[\n*]' | sort - same as the output in the previous answer, exc
+ept that the lines are now sorted alphabetically
+
+tr -cs 'A-Za-z' '[\n*]' | sort -u - sorts the file as seen in the previous answ
+er, but removes all duplicates of words, makes sure that each line printed is u
+nique
+
+tr -cs 'A-Za-z' '[\n*]' | sort -u | comm - words - takes the output as seen in
+the previous anwer and compares it to a dictionary of words. The output for thi
+s command is in three columns, the first containing words that are unique to th
+e HTML file, the second containing words unique to the dictionary and the third
+containing words that appear in both
+
+tr -cs 'A-Za-z' '[\n*]' | sort -u | comm -23 words - only displays the first co
+lumn of the previous answer. This means that the output consists of files in th
+e HTMl file that are not in the dictionary
+
+buildwords script
+The run down of the script goes like this. The script first uses the tr comman
+dto turn everything into lowercase. Then, using multiple sed commands, I remove
+the underlining HTML tags as well as the isolate the page to just the table. I
+recognized that the English words were always inbetween a <tr> and a </td> tag,
+so I used the sed command to remove those tags (in that order) and anything in
+between them. Following that, I removed the remaining HTML tags as well as any
+extraneous spaces, used the sort -u command to remove extra line breaks and
+any duplicate entries. Finally, I removed any lines that contained non-Hawaiian
+characters using the sed command.
+
+Spellchecker
+To check for english words, you can use this command:
+cat assign2.html | tr '[:upper:]' '[:lower:]' | tr -cs 'A-Za-z' '[\n*]' | sort
+-u | comm -23 - words
+
+Using the word count command, it was found that there were 38 'mispelled' Engli
+sh words on the page
+
+To check for mispelled Hawaiian words, simply replace words with hwords in the
+previous command. There are 408 mispelled Hawaiian words on the page.
+
+An example of a word that was mispelled in English but correct in Hawaiian is '
+wiki'. There are a lot more that are mispelled in Hawaiian but correct in Engli
+sh, such as the word 'change'.
+
+Sameln log
+My sameln script works as follows.
+I first look through the directory for hidden files, storing those in one varia
+ble.
+Then, I look for all non hidden files, storing those in another variable.
+I then take the hidden files and put them in the array (sorted in alphabetical
+order),
+and then use the same process to put in the regular files, *after* the hidden f
+iles in the array.
+When adding these to the array, I use the -f option in the if statment to make
+sure that they were regular files.
+After that, I used a nested for loop to iterate through each element in the arr
+ay
+If the file name was the same, I moved on to the next element in the array.
+Using the cmp command, and the $? command in the if statement, I was able to ch
+eck if the files were duplicates of each other. If they were in fact duplicates
+I deleted the old file and used ln to link the two together.

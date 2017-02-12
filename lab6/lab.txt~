@@ -1,0 +1,105 @@
+Logic behind the program: It first checks to see that the basic conditions
+are met. (Arguments, checking for duplicates, etc). Then it reads in the
+file - replaces the character if it matches or just prints it out again
+if it doesn't.
+
+I generated a file testjello that had around 8000000 bytes
+
+File copying to another file with
+strace -c ./tr2b a b < testjello > testresults.txt
+% time     seconds  usecs/call     calls    errors syscall
+------ ----------- ----------- --------- --------- ----------------
+ 65.89    0.001275          10       130           read
+ 25.99    0.000503           4       128           write
+  2.74    0.000053           6         9           mmap
+  1.45    0.000028           7         4           mprotect
+  0.98    0.000019           5         4           fstat
+  0.72    0.000014           7         2           open
+  0.52    0.000010          10         1           munmap
+  0.52    0.000010          10         1           execve
+  0.36    0.000007           4         2           close
+  0.36    0.000007           7         1         1 access
+  0.31    0.000006           6         1           brk
+  0.16    0.000003           3         1           arch_prctl
+------ ----------- ----------- --------- --------- ----------------
+100.00    0.001935                   284         1 total
+
+strace -c ./tr2u a b < testjello > testresults.txt
+% time     seconds  usecs/call     calls    errors syscall
+------ ----------- ----------- --------- --------- ----------------
+ 55.56    9.739842           1   8388608           write
+ 44.44    7.790234           1   8388610           read
+  0.00    0.000047           7         7           mmap
+  0.00    0.000027           7         4           mprotect
+  0.00    0.000016           8         2           open
+  0.00    0.000010          10         1           munmap
+  0.00    0.000008           4         2           close
+  0.00    0.000008           4         2           fstat
+  0.00    0.000007           7         1         1 access
+  0.00    0.000005           5         1           execve
+  0.00    0.000004           4         1           brk
+  0.00    0.000004           4         1           arch_prctl
+------ ----------- ----------- --------- --------- ----------------
+100.00   17.530212              16777240         1 total
+
+File copying to the terminal
+
+strace -c ./tr2b a b < testjello
+% time     seconds  usecs/call     calls    errors syscall
+------ ----------- ----------- --------- --------- ----------------
+ 99.98    5.232503           1   4194304           write
+  0.01    0.000734           6       130           read
+  0.00    0.000054           6         9           mmap
+  0.00    0.000028           7         4           mprotect
+  0.00    0.000019           5         4           fstat
+  0.00    0.000016           8         2           open
+  0.00    0.000011          11         1           munmap
+  0.00    0.000008           8         1         1 access
+  0.00    0.000007           4         2           close
+  0.00    0.000007           7         1           execve
+  0.00    0.000004           4         1           brk
+  0.00    0.000004           4         1           arch_prctl
+------ ----------- ----------- --------- --------- ----------------
+100.00    5.233395               4194460         1 total
+
+
+strace -c ./tr2u a b < testjello
+% time     seconds  usecs/call     calls    errors syscall
+------ ----------- ----------- --------- --------- ----------------
+ 58.72   10.831458           1   8388608           write
+ 41.28    7.613269           1   8388610           read
+  0.00    0.000044           6         7           mmap
+  0.00    0.000030           8         4           mprotect
+  0.00    0.000014           7         2           open
+  0.00    0.000010          10         1           munmap
+  0.00    0.000009           5         2           fstat
+  0.00    0.000007           4         2           close
+  0.00    0.000007           7         1         1 access
+  0.00    0.000005           5         1           execve
+  0.00    0.000004           4         1           brk
+  0.00    0.000004           4         1           arch_prctl
+------ ----------- ----------- --------- --------- ----------------
+100.00   18.444861              16777240         1 total
+
+As we can see, in both cases, the buffered case uses less calls than the
+unbuffered program. It is worth noting that the buffered version that copies
+to the terminal uses significantly more calls. This is probably due to the fact
+that my test file used single characters and newlines, "spacing out" the content.
+That said, the number of calls is still a lot less than the unbuffered.
+
+Time comparisons:
+
+time ./tr2b a b < testjello > testresults.txt
+
+real	0m0.334s
+user	0m0.209s
+sys	0m0.016s
+
+time ./tr2u a b < testjello > testresults.txt
+
+real	0m11.913s
+user	0m0.458s
+sys	0m11.340s
+
+Following the same trend as system calls - the time for the buffered command
+is much shorter.

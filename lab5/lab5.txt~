@@ -1,0 +1,45 @@
+Labatory Notebook
+
+1. Using the command
+wget http://web.cs.ucla.edu/classes/fall16/cs35L/assign/coreutils-with-bug.tar.gz
+
+I downloaded the file into my local directory
+and the ran ./configure and make
+Upon running the make command, the error message stated that
+the futimens function had conflicting types.
+The files affected were utimecap.c, utimecap.h
+
+2. Used the command
+wget http://web.cs.ucla.edu/classes/fall16/cs35L/assign/coreutils.diff
+
+To grab the patch from the website then used the command
+patch -p0 < coreutils.diff to apply the patch
+
+patching file lib/utimens.c
+patching file lib/utimens.h
+patching file src/copy.c
+patching file src/tee.c
+patching file src/touch.c
+
+The patch renames the function such that they will no longer conflict with each other.
+
+3. Used ./configure and make, which worked succesfully with the patch applied
+
+4. Ran the commands available on the webpage to reproduce the issue and
+the older touch file was placed first in the output, which was incorrect.
+
+5. To find the source of the issue, I started by looking through the source code of ls.c. Based off intutition, it is fair to assume that there is some
+issue with a sorting algorithm within the function. One function that did so
+was cmp_mtime which called timespec_cmp. That function simply finds the difference
+between the two times that are passed in, which can lead to problems of overflow
+and wraparound if one term is too large. Therefore, we can simply use the
+greater than and less than comparators to look at dates.
+
+Generated the patch with diff -u coreutils-with-bug/lib/timespec.h coreutils-with-bug/lib/timespecfix.h
+
+And used C-x 4 a to add a changelog.
+
+There is an issue when running it on the SEASnet server, where the timestamp
+appears in the future and incorrectly. Because the SEASnet is unsigned,
+and a local is signed, the value will not account for that sign potential
+thus presenting a much higher value. Therefore, we must touch the file on the local system.

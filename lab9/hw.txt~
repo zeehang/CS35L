@@ -1,0 +1,26 @@
+Homework notes
+
+1. Because we were sending data using ssh, it would be safe. Although they
+would be able to see the public key, the data can only be encrypted
+by the RECEIVERS private key - which never gets transferred. The initial
+"handhsake" session key would be extremely hard to decrypt, thus the data
+should be secure.
+
+However - if they had access to the keyboard, then they would be able to guess
+the passphrase based on keyboard input. That means they'd be able to
+decrypt the key and access the information.
+
+As with a lot of things in security, physical control by a hacker (even
+temporarily) will probably make it unsafe. If they had control of the system
+they could find the public and private keys that were saved in the home
+directory. Then, they'd be able to decrypt the information sent between
+the two computers.
+
+2. gpg --verify only verifies the cleartext signature, it does not infect
+verify the identity of who is sending the information. For example, you
+could spoof data by intercepting communication then replacing it with your
+own false data. If the "middle man" was to encrypt the data using their own
+key, verify will still work, since its simply ensuring that a document
+has not been altered since the signature was created - it doesn't account
+for the fact that there could be a completely new and spoofed document (whose
+signature would still verify!)

@@ -1,0 +1,4 @@
+1. In order to first start parallelizing the program, I started by taking
+a look at the presentation slides presented in class. I decided to utilize
+a very similar format for creating nthreads and joining them. This meant
+I had to 

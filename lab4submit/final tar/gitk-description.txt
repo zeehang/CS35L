@@ -1,0 +1,11 @@
+The upper left window shows a "timeline" of commits
+merges and branches.
+
+The upper middle window shows who committed each action in the repo
+
+The upper right window shows the date the commit occured
+
+The bottom window shows the details and commit message/ChangeLog
+while noting the parent and child branches
+
+The bottom right window shows the modified files

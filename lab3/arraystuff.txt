@@ -1,0 +1,14 @@
+Wk 5 sample question
+
+allocate/deallocate memory two a 2 dimension array
+don't need to include the appropriate libraries
+
+int main()
+{
+	int **arr;
+	malloc(100*(sizeof)(*int));
+	for(int i = 0; i < 100; i++){
+		malloc(200*(sizeof)int);
+	}
+	
+}

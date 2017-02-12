@@ -1,0 +1,34 @@
+In order to test the timing of sfrob, sfrobu and sfrobs, I created a file
+which contained copies of the test string provided in Assignment 5. The
+timings are shown as followed.
+
+The time for sfrob was
+
+real	0m0.040s
+user	0m0.028s
+sys	0m0.010s
+
+The time for sfrobu was
+
+real	0m0.285s
+user	0m0.040s
+sys	0m0.243s
+
+The time for sfrobs was
+
+real	0m0.049s
+user	0m0.043s
+sys	0m0.011s
+
+Like before, this makes sense. System calls will be slower so sfrobu should
+take more time than any of the others. Sfrob and sfrobs were pretty similar
+in time. They both depend on relatively optimized functions, so this makes
+sense.
+
+Running with a 1 line file - 39 comparisons
+10 line file - 712
+100 line file - 11197
+
+This gives us an approximately linear trend comparison between the number
+of the lines in the file and the number of comparisons made, which
+makes sense.

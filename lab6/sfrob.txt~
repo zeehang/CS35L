@@ -1,0 +1,22 @@
+The time for sfrob was
+
+real	0m0.617s
+user	0m0.341s
+sys	0m0.090s
+
+The time for sfrobu was
+
+real	0m1.976s
+user	0m0.346s
+sys	0m1.618s
+
+Like before, this makes sense. System calls will be slower so sfrobu should
+take more time. Like before
+
+Running with a 1 line file - 39 comparisons
+10 line file - 712
+100 line file - 11197
+
+This gives us an approximately linear trend comparison between the number
+of the lines in the file and the number of comparisons made, which
+makes sense.

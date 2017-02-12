@@ -1,0 +1,72 @@
+Lab Log
+
+Before starting the lab, I made sure ubtuntu had the openSSH package. To do this
+I first had to update the apt-get tool by running
+
+sudo apt-get
+
+and then I was able to install both the server and client packages by running
+
+sudo apt-get install openssh-server
+sudo apt-get install openssh-client
+
+First I generated my public and private keys using the command
+ssh-keygen
+
+The default save location was ~/.ssh.is_rsa and id_rsa.pub
+
+I saved the files in the default locations and gave myself
+the passphrase 'november'.
+
+Acting as the client
+
+After my partner installed the server, I used the command
+ssh-copy-id -i jamin@10.97.85.136
+and was able to successfully copy my key to his server after logging
+in using the password that we created. The command copied the public key
+so that the server would be able to recognize the client.
+
+Using the command
+ssh -add
+
+This adds the private key to the local ssh-agent and was prompted to
+input the passphrase that I had created earlier.
+
+Following these steps, I was able to log in to the server
+without a password/passphrase by simply typing
+ssh jamin@10.97.85.136
+
+I was able to create files and run commands (and my partner checked
+to see that they appeared on the server as well), and by using the
+-x modifier (ssh -X) I was able to run/see GUI programs on the
+client side.
+
+Acting as the server
+
+After ensuring the the open-ssh server software package was installed,
+I added a new user to the system by using the command
+sudo useradd -d /home/newuser1 -m user1
+
+and create a password 'user1' for the account using
+sudo password user1
+
+After this I used
+cd /home/newuser1
+to go into the directory and create a .ssh directory for user1 by using
+
+sudo mkdir .ssh
+
+Following the creation of the directory, I changed the permissions of the
+directory so that they'd be accessible to the new user:
+
+chmod chown -R user1 .ssh
+sudo chmod 700 .ssh
+
+I found the machine's IP address using ifconfig which was 10.97.95.150, and passed
+that information on to my partners. Although I could have disabled password-based
+authentication by editing the /etc/ssh/sshd_config file, I chose not to - giving
+users the option to log in with a password (this could be potentially unsafe
+if there was a middleman spying on the network!)
+
+They were then able to log in using the username and password that I had created
+and perform commands using their client side machines.
